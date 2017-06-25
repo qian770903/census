@@ -1,24 +1,3 @@
-# ui.R
-
-shinyUI(fluidPage(
-  titlePanel("censusVis"),
-  
-  sidebarLayout(
-    sidebarPanel(
-      helpText("Create demographic maps with 
-               information from the 2010 US Census."),
-      
-      selectInput("var", 
-                  label = "Choose a variable to display",
-                  choices = c("Percent White", "Percent Black",
-                              "Percent Hispanic", "Percent Asian"),
-                  selected = "Percent White"),
-      
-      sliderInput("range", 
-                  label = "Range of interest:",
-                  min = 0, max = 100, value = c(0, 100))
-      ),
-    
-    mainPanel(plotOutput("map"))
-  )
-))
+#ui.R
+library(shiny)
+shinyUI(fluidPage(  titlePanel("stockVis"),    sidebarLayout(    sidebarPanel(      helpText("Select a stock to examine.         Information will be collected from yahoo finance."),          textInput("symb", "Symbol", "SPY"),          dateRangeInput("dates",         "Date range",        start = "2013-01-01",         end = as.character(Sys.Date())),         actionButton("get", "Get Stock"),            br(),      br(),            checkboxInput("log", "Plot y axis on log scale",         value = FALSE),            checkboxInput("adjust",         "Adjust prices for inflation", value = FALSE)    ),        mainPanel(plotOutput("plot"))  )))
